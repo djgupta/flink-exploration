@@ -1,4 +1,4 @@
-package exploration;
+package exploration.data;
 
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;

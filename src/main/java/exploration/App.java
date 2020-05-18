@@ -3,6 +3,8 @@ package exploration;
 import java.util.HashMap;
 import java.util.Map;
 
+import exploration.ways.*;
+
 public class App {
 
 	public static void main(String[] args) throws Exception {

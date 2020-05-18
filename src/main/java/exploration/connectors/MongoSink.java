@@ -1,4 +1,4 @@
-package exploration;
+package exploration.connectors;
 
 import java.util.List;
 import java.util.stream.Collectors;

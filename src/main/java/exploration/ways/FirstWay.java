@@ -1,4 +1,4 @@
-package exploration;
+package exploration.ways;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.DataSet;
@@ -7,6 +7,8 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.MultipleParameterTool;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.Preconditions;
+
+import exploration.data.WordCountData;
 
 
 public class FirstWay implements Way {

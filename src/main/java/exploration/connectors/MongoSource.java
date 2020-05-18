@@ -1,4 +1,4 @@
-package exploration;
+package exploration.connectors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +14,12 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class MongoConnection extends RichSourceFunction<List<String>> {
+public class MongoSource extends RichSourceFunction<List<String>> {
 	
 	private final String connString;
 	private MongoClient mongoClient;
 	
-	public MongoConnection(String connString) {
+	public MongoSource(String connString) {
 		this.connString = connString;
 	}
 	

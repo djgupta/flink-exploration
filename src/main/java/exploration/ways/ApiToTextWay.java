@@ -1,8 +1,9 @@
-package exploration;
+package exploration.ways;
 
 import org.apache.flink.api.common.functions.MapFunction;
-import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
+import exploration.connectors.ApiSource;
 
 
 public class ApiToTextWay implements Way{
@@ -11,10 +12,8 @@ public class ApiToTextWay implements Way{
     public void execute(String[] args) throws Exception {
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        String url = "https://jsonplaceholder.typicode.com/todos/1";
-
         env
-        .addSource(new HttpGetConnection(url))
+        .addSource(new ApiSource("https://jsonplaceholder.typicode.com/todos/1"))
         .map(new MapFunction<StringBuilder, String>() {
             @Override
             public String map(StringBuilder value) throws Exception {

@@ -1,32 +1,33 @@
-package exploration;
+package exploration.ways;
 
 import java.util.List;
 
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-public class MultiWay implements Way {
+import exploration.connectors.ApiSource;
+import exploration.connectors.MongoSource;
+
+public class DependentWay implements Way{
 
 	@Override
 	public void execute(String[] args) throws Exception {
 		
-		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-		
-		env
-        .addSource(new MongoConnection("mongodb://localhost:27017/"))
+        final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        
+        env
+        .addSource(new MongoSource("mongodb://localhost:27017/"))
         .map(new MapFunction<List<String>, List<String>>() {
-    		@Override
-    		public List<String> map(List<String> documents) throws Exception {
-    			return documents;
-    		}
+            @Override
+            public List<String> map(List<String> documents) throws Exception {
+                return documents;
+            }
         })
-//        .addSink(new MongoSink("mongodb://localhost:27017/"));
         .writeAsText("file:///home/dj/projects/personal/flink-exploration/src/main/java/exploration/data/response-mongo.txt");
-		
-        String url = "https://jsonplaceholder.typicode.com/todos/1";
 
         env
-        .addSource(new HttpGetConnection(url))
+        .addSource(new ApiSource("https://jsonplaceholder.typicode.com/todos/1"))
         .map(new MapFunction<StringBuilder, String>() {
             @Override
             public String map(StringBuilder value) throws Exception {
@@ -40,12 +41,8 @@ public class MultiWay implements Way {
             }
         })
         .writeAsText("file:///home/dj/projects/personal/flink-exploration/src/main/java/exploration/data/response-api.txt");
-        
-        
-		
-		
-        
-        env.execute("Mongo and API");
+
+        env.execute("Http Get");
 		
 	}
 
