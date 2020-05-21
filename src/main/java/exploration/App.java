@@ -15,9 +15,14 @@ public class App {
 		ways.put(2, new CsvToCsvWay());
 		ways.put(3, new ApiToTextWay());
 		ways.put(4, new MongoToMongoWay());
-		ways.put(5, new MultiWay());
-		ways.put(6, new DependentWay());
+		ways.put(5, new MultiJobWay());
+		ways.put(6, new OneJobWay());
 
-		ways.get(6).execute(args);
+		if(args.length > 0) {
+			ways.get(Integer.parseInt(args[0])).execute(args);
+		}
+		else(
+			ways.get(0).execute(args);
+		)
 	}
 }
